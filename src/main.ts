@@ -1,9 +1,10 @@
+/* eslint-disable prettier/prettier */
 import { INestMicroservice, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 import { join } from 'path';
 import { AppModule } from './app.module';
-import { protobufPackage } from './product/product.pb';
+import { protobufPackage } from './offer/offer.pb';
 
 async function bootstrap() {
   const app: INestMicroservice = await NestFactory.createMicroservice(AppModule, {

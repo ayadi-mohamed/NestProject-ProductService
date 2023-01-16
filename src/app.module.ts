@@ -1,22 +1,23 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductModule } from './product/product.module';
+import { OfferModule } from './offer/offer.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: '192.168.1.100',
       port: 5432,
-      database: 'micro_product',
+      database: 'offerdb',
       username: 'postgres',
       password: '123',
       entities: ['dist/**/*.entity.{ts,js}'],
       synchronize: true, // never true in production!
     }),
-    ProductModule,
+    OfferModule,
   ],
   controllers: [AppController],
   providers: [AppService],
