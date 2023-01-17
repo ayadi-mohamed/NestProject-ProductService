@@ -58,6 +58,7 @@ export class OfferService {
 
   public async updateOffer(payload: updateRequestDto): Promise<UpdateResponseOffer> {
     const idOffer = payload.idOffer;
+ 
     const offer = await this.repository.preload({
       idOffer,
       ...payload
@@ -66,7 +67,7 @@ export class OfferService {
     if(! offer) {
       return { data: null, error: ['Offer not found'], status: HttpStatus.NOT_FOUND };
     }
-
+    await this.repository.save(offer);
     return { data: offer, error: null, status: HttpStatus.OK };
   }
 
@@ -81,14 +82,10 @@ export class OfferService {
     return { idOffer: idOffer, error: null, status: HttpStatus.OK };
   }
   public async restoreOffer({ idOffer }: restoreRequestDto): Promise<RestoreResponseOffer> {
-    const offer1 = await this.repository.query("select * from offerdb where id = ?", [idOffer]);
-    if (!offer1) {
-      return { data: null, error: ['This offer did not exist'], status: HttpStatus.NOT_FOUND };
-    }
-    
+   
     await this.repository.restore(idOffer);
-    const offer2 = await this.repository.query("select * from offerdb where id = ?", [idOffer]);
-    return { data: offer2, error: null, status: HttpStatus.OK };
+    const offer = await this.repository.findOne({ where: { idOffer } });
+    return { data: offer, error: null, status: HttpStatus.OK };
   }
 }
 
