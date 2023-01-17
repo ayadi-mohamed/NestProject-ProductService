@@ -24,6 +24,7 @@ export class addRequestDto implements  AddRequestOffer {
   @IsNotEmpty()
   public readonly description: string;
 
+  @IsNotEmpty()
   public readonly  availability: boolean;
 
 }
@@ -70,4 +71,5 @@ export class restoreRequestDto implements RestoreRequestOffer {
   @IsNumber({ allowInfinity: false, allowNaN: false })
   public readonly idOffer: number;
 }
+
 

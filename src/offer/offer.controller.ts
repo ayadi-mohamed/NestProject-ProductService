@@ -40,12 +40,12 @@ export class OfferController {
     return this.service.updateOffer(payload);
   }
 
-  @GrpcMethod(OFFER_SERVICE_NAME, 'softDLltOffer')
+  @GrpcMethod(OFFER_SERVICE_NAME, 'softDeleteOffer')
   private softDeleteOffer(payload: softDltRequestDto): Promise<SoftDltResponseOffer> {
     return this.service.softDeleteOffer(payload);
   }
 
-  @GrpcMethod(OFFER_SERVICE_NAME, 'softDLltOffer')
+  @GrpcMethod(OFFER_SERVICE_NAME, 'restoreOffer')
   private restoreOffer(payload: restoreRequestDto): Promise<RestoreResponseOffer> {
     return this.service.restoreOffer(payload);
   }
